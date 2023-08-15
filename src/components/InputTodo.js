@@ -1,35 +1,42 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react"
 
-const InputTodo = ({ addTodoItem }) => {
-  const [title, setTitle] = useState('');
+const InputTodo = props => {
+  const [inputText, setInputText] = useState({
+    title: "",
+  })
 
-  const handleChange = (e) => {
-    setTitle(e.target.value);
-  };
+  const onChange = e => {
+    setInputText({
+      ...inputText,
+      [e.target.name]: e.target.value,
+    })
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (title.trim()) {
-      addTodoItem(title);
-      setTitle('');
+  const handleSubmit = e => {
+    e.preventDefault()
+    if (inputText.title.trim()) {
+      props.addTodoProps(inputText.title)
+      setInputText({
+        title: "",
+      })
+    } else {
+      alert("Please write item")
     }
-  };
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="form-container">
       <input
         type="text"
-        placeholder="Add Todo..."
-        value={title}
-        onChange={handleChange}
+        className="input-text"
+        placeholder="Add todo..."
+        value={inputText.title}
+        name="title"
+        onChange={onChange}
       />
-      <button type="submit">Submit</button>
+      <button className="input-submit">Submit</button>
     </form>
-  );
-};
-export default InputTodo;
+  )
+}
 
-InputTodo.propTypes = {
-  addTodoItem: PropTypes.func.isRequired,
-};
+export default InputTodo
