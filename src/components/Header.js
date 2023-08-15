@@ -18,6 +18,17 @@ const Header = () => {
                 textAlign: "center",
               }}
             >Todos</h1>
+            <h3 
+             style={{
+                fontSize: "1.5rem",
+                fontWeight: "600",
+                marginBottom: "2rem",
+                lineHeight: "1em",
+                color: "#ececec",
+                textTransform: "lowercase",
+                textAlign: "center",
+              }}
+            >Items will persist in the browser local storage</h3>
         </header>
     )
 }
